@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd
+	"
+	>
+	<!-- 这个文件用来配置数据源，事务，aop等信息 -->
+	
+	<context:component-scan base-package="com.t"></context:component-scan>
+	<!-- 1.配置数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>	
+		<property name="jdbcUrl" value="jdbc:mysql:///insurance?characterEncoding=UTF8"></property>	
+		<property name="user" value="root"></property>	
+		<property name="password" value="123654789"></property>	
+	</bean>
+	<!-- 2.整合Mybatis，生成sqlSessionFactory对象，并加入到Spring容器中 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property><!-- 注入数据源 -->
+		<!-- 给指定包下的实体类生成别名 -->
+		<property name="typeAliasesPackage" value="com.t.entity"></property>
+		<!-- 加载指定包下的Mybatis映射文件 -->
+		<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+	</bean>
+	
+	<!-- 将由Mybatis创建的持久层接口的实现类对象放入Spring容器中 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+		<property name="basePackage" value="com.t.dao"></property>
+	</bean>
+	
+	
+</beans>
