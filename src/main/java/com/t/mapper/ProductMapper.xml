@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.t.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.t.entity.Product" >
+    <id column="id" property="productId" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="period" property="period" jdbcType="INTEGER" />
+    <result column="creatorid" property="creatorid" jdbcType="BIGINT" />
+    <result column="creatorname" property="creatorname" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="discount" property="discount" jdbcType="DOUBLE" />
+    <result column="bottomprice" property="bottomprice" jdbcType="INTEGER" />
+    <result column="myorder" property="myorder" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.t.entity.Product" extends="BaseResultMap" >
+    <result column="memo" property="memo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, type, period, creatorid, creatorname, createtime, price, discount, bottomprice, 
+    myorder, state
+  </sql>
+  <sql id="Blob_Column_List" >
+    memo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    where id = #{productId,jdbcType=BIGINT}
+  </select>
+  
+  <select id="search" resultMap="ResultMapWithBLOBs" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from product
+    where state = 1
+     <if test="type != null" >
+         AND type=#{type}
+      </if>
+     <if test="namelike != null" >
+        AND name like #{namelike}
+      </if>
+    	ORDER BY id ASC; 
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from product
+    where id = #{productId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.t.entity.Product" >
+    insert into product (id, name, type, 
+      period, creatorid, creatorname, 
+      createtime, price, discount, 
+      bottomprice, myorder, state, 
+      memo)
+    values (#{productId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{period,jdbcType=INTEGER}, #{creatorid,jdbcType=BIGINT}, #{creatorname,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{price,jdbcType=DOUBLE}, #{discount,jdbcType=DOUBLE}, 
+      #{bottomprice,jdbcType=INTEGER}, #{myorder,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, 
+      #{memo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.t.entity.Product" >
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="period != null" >
+        period,
+      </if>
+      <if test="creatorid != null" >
+        creatorid,
+      </if>
+      <if test="creatorname != null" >
+        creatorname,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="bottomprice != null" >
+        bottomprice,
+      </if>
+      <if test="myorder != null" >
+        myorder,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="productId != null" >
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null" >
+        #{period,jdbcType=INTEGER},
+      </if>
+      <if test="creatorid != null" >
+        #{creatorid,jdbcType=BIGINT},
+      </if>
+      <if test="creatorname != null" >
+        #{creatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="bottomprice != null" >
+        #{bottomprice,jdbcType=INTEGER},
+      </if>
+      <if test="myorder != null" >
+        #{myorder,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.t.entity.Product" >
+    update product
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null" >
+        period = #{period,jdbcType=INTEGER},
+      </if>
+      <if test="creatorid != null" >
+        creatorid = #{creatorid,jdbcType=BIGINT},
+      </if>
+      <if test="creatorname != null" >
+        creatorname = #{creatorname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DOUBLE},
+      </if>
+      <if test="bottomprice != null" >
+        bottomprice = #{bottomprice,jdbcType=INTEGER},
+      </if>
+      <if test="myorder != null" >
+        myorder = #{myorder,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{productId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.t.entity.Product" >
+    update product
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      period = #{period,jdbcType=INTEGER},
+      creatorid = #{creatorid,jdbcType=BIGINT},
+      creatorname = #{creatorname,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DOUBLE},
+      discount = #{discount,jdbcType=DOUBLE},
+      bottomprice = #{bottomprice,jdbcType=INTEGER},
+      myorder = #{myorder,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      memo = #{memo,jdbcType=LONGVARCHAR}
+    where id = #{productId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.t.entity.Product" >
+    update product
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      period = #{period,jdbcType=INTEGER},
+      creatorid = #{creatorid,jdbcType=BIGINT},
+      creatorname = #{creatorname,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DOUBLE},
+      discount = #{discount,jdbcType=DOUBLE},
+      bottomprice = #{bottomprice,jdbcType=INTEGER},
+      myorder = #{myorder,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{productId,jdbcType=BIGINT}
+  </update>
+</mapper>

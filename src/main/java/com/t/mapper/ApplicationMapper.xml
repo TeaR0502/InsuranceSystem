@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.t.dao.ApplicationMapper">
+	<resultMap id="BaseResultMap" type="com.t.entity.Application">
+		<constructor>
+			<idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+			<arg column="userid" jdbcType="BIGINT" javaType="java.lang.Long" />
+			<arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="usertruename" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="usermobile" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="useridcard" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="productid" jdbcType="BIGINT" javaType="java.lang.Long" />
+			<arg column="productname" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="productperiod" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="createtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+			<arg column="endtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+			<arg column="reply" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="replytime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+			<arg column="state" jdbcType="INTEGER" javaType="java.lang.Integer" />
+			<arg column="addition" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="esign" jdbcType="VARCHAR" javaType="java.lang.String" />
+			<arg column="esigntime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+		</constructor>
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, userid, username, usertruename, usermobile, useridcard,
+		productid,
+		productname,
+		productperiod, createtime, endtime, reply,
+		replytime, state, addition, esign,
+		esigntime
+	</sql>
+
+	<!-- 修改用户订单 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.t.entity.Application">
+		update application
+		<set>
+			<if test="userId != null">
+				userid = #{userId,jdbcType=BIGINT},
+			</if>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="userTruename != null">
+				usertruename = #{userTruename,jdbcType=VARCHAR},
+			</if>
+			<if test="usermobile != null">
+				usermobile = #{usermobile,jdbcType=VARCHAR},
+			</if>
+			<if test="userIdCard != null">
+				useridcard = #{userIdCard,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				productid = #{productId,jdbcType=BIGINT},
+			</if>
+			<if test="productName != null">
+				productname = #{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="productPeriod != null">
+				productperiod = #{productPeriod,jdbcType=INTEGER},
+			</if>
+			<if test="createtime != null">
+				createtime = #{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endtime != null">
+				endtime = #{endtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reply != null">
+				reply = #{reply,jdbcType=VARCHAR},
+			</if>
+			<if test="replytime != null">
+				replytime = #{replytime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=INTEGER},
+			</if>
+			<if test="addition != null">
+				addition = #{addition,jdbcType=VARCHAR},
+			</if>
+			<if test="esign != null">
+				esign = #{esign,jdbcType=VARCHAR},
+			</if>
+			<if test="esigntime != null">
+				esigntime = #{esigntime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.t.entity.Application">
+		update application
+		set userid = #{userId,jdbcType=BIGINT},
+		username =
+		#{username,jdbcType=VARCHAR},
+		usertruename =
+		#{userTruename,jdbcType=VARCHAR},
+		usermobile =
+		#{usermobile,jdbcType=VARCHAR},
+		useridcard =
+		#{userIdCard,jdbcType=VARCHAR},
+		productid =
+		#{productId,jdbcType=BIGINT},
+		productname =
+		#{productName,jdbcType=VARCHAR},
+		productperiod =
+		#{productPeriod,jdbcType=INTEGER},
+		createtime =
+		#{createtime,jdbcType=TIMESTAMP},
+		endtime =
+		#{endtime,jdbcType=TIMESTAMP},
+		reply = #{reply,jdbcType=VARCHAR},
+		replytime = #{replytime,jdbcType=TIMESTAMP},
+		state =
+		#{state,jdbcType=INTEGER},
+		addition = #{addition,jdbcType=VARCHAR},
+		esign = #{esign,jdbcType=VARCHAR},
+		esigntime =
+		#{esigntime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<!-- 用户提交申请 -->
+	<insert id="insertSelective" parameterType="com.t.entity.Application">
+		insert into application
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="userId != null">
+				userid,
+			</if>
+			<if test="username != null">
+				username,
+			</if>
+			<if test="userTruename != null">
+				usertruename,
+			</if>
+			<if test="usermobile != null">
+				usermobile,
+			</if>
+			<if test="userIdCard != null">
+				useridcard,
+			</if>
+			<if test="productId != null">
+				productid,
+			</if>
+			<if test="productName != null">
+				productname,
+			</if>
+			<if test="productPeriod != null">
+				productperiod,
+			</if>
+			<if test="createtime != null">
+				createtime,
+			</if>
+			<if test="endtime != null">
+				endtime,
+			</if>
+			<if test="reply != null">
+				reply,
+			</if>
+			<if test="replytime != null">
+				replytime,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+			<if test="addition != null">
+				addition,
+			</if>
+			<if test="esign != null">
+				esign,
+			</if>
+			<if test="esigntime != null">
+				esigntime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=BIGINT},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="userTruename != null">
+				#{userTruename,jdbcType=VARCHAR},
+			</if>
+			<if test="usermobile != null">
+				#{usermobile,jdbcType=VARCHAR},
+			</if>
+			<if test="userIdCard != null">
+				#{userIdCard,jdbcType=VARCHAR},
+			</if>
+			<if test="productId != null">
+				#{productId,jdbcType=BIGINT},
+			</if>
+			<if test="productName != null">
+				#{productName,jdbcType=VARCHAR},
+			</if>
+			<if test="productPeriod != null">
+				#{productPeriod,jdbcType=INTEGER},
+			</if>
+			<if test="createtime != null">
+				#{createtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="endtime != null">
+				#{endtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="reply != null">
+				#{reply,jdbcType=VARCHAR},
+			</if>
+			<if test="replytime != null">
+				#{replytime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=INTEGER},
+			</if>
+			<if test="addition != null">
+				#{addition,jdbcType=VARCHAR},
+			</if>
+			<if test="esign != null">
+				#{esign,jdbcType=VARCHAR},
+			</if>
+			<if test="esigntime != null">
+				#{esigntime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+
+	<!-- 查询符合条件的用户申请 -->
+	<select id="selectByUserId" resultMap="BaseResultMap"
+		parameterType="map">
+		select
+		<include refid="Base_Column_List" />
+		from application
+		<where>
+			AND userid = #{userId}
+			<if test="data1 != null and data2 != null">
+				AND createtime between #{data1} and #{data2}
+			</if>
+		</where>
+
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from application
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		application
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
+
+	
+</mapper>
