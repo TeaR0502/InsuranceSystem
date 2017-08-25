@@ -2,6 +2,7 @@ package com.t.controller;
 
 import java.io.File;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,13 +100,6 @@ public class DemoController {
 		
 	}
 	
-	@RequestMapping("/admin/login")
-	public String adminLogin(Model model){
-		User user=(User) session.getAttribute("user");
-		model.addAttribute("user",user);
-		return "web-view/proj-a-b/login";
-	}
-	
 	@RequestMapping("/myinfo")
 	public String myinfo(){
 		return "web-view/proj-a-f/myinfo";
@@ -124,6 +118,29 @@ public class DemoController {
 	@RequestMapping("/apply")
 	public String apply(){
 		return "web-view/proj-a-f/apply";
+	}
+	
+	@RequestMapping("/admin/login")
+	public String adminLogin(Model model){
+		User user=(User) session.getAttribute("user");
+		
+		model.addAttribute("user",user);
+		return "web-view/proj-a-b/login";
+	}
+	@RequestMapping("/admin/product")
+	public String adminProduct(){
+		return "web-view/proj-a-b/product";
+	}
+	
+	
+	@RequestMapping("/admin/prdadd")
+	public String adminPrdadd(){
+		return "web-view/proj-a-b/prdadd";
+	}
+	
+	@RequestMapping("/admin/apply")
+	public String adminApply(){
+		return "web-view/proj-a-b/apply";
 	}
 	
 	

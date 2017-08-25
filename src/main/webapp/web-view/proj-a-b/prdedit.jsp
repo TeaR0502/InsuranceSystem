@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -33,8 +34,8 @@
 	<div class="vbox-0 w90p cen">
 		<div class="vbox-1 txt-c w250 cen ft-1-g shadow">@ 编 辑 产 品</div>
 		<div class="h20"></div>
-		<form action="proja/Product/update" method="POST" id="fmPrdup">
-			<input type="text" name="id" value="${prd.id}" class="hide" />
+		<form action="Product/update" method="POST" id="fmPrdup">
+			<input type="text" name="productId" value="${prd.productId}" class="hide" />
 			<div class="vbox-1">
 				<table class="table table-very table-basic">
 					<tr>

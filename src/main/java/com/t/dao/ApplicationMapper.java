@@ -47,12 +47,14 @@ public interface ApplicationMapper {
 	 */
 	List<Application> selectByUserId(@Param(value = "data1") Date date1,@Param(value = "data2")Date date2,@Param(value = "userId")long userId);
 	
-    
+	/**
+	 * 查询符合条件的用户申请
+	 * @param newDate1
+	 * @param newDate2
+	 * @return
+	 */
+	List<Application> select(Date newDate1, Date newDate2);
    
     
-
-    
-
-
-	Admin selectByUsername(String name);
+	
 }

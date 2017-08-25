@@ -245,6 +245,18 @@
 
 	</select>
 
+	<select id="select" resultMap="BaseResultMap" >
+		select
+		<include refid="Base_Column_List" />
+		from application
+	</select>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		application
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Long">
 		select
@@ -252,12 +264,5 @@
 		from application
 		where id = #{id,jdbcType=BIGINT}
 	</select>
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-		delete from
-		application
-		where id = #{id,jdbcType=BIGINT}
-	</delete>
-
-
 	
 </mapper>

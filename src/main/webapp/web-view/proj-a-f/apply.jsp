@@ -230,10 +230,11 @@
 
 		//根据申请id获取信息
 		function showInfoByAppid(appid) {
-			$.post("proja/Application/showApplyById", {
+			$.post("Application/showApplyById", {
 				id : appid
 			}, function(data) {
 				var res = $.parseJSON(data);
+				//alert(res.addition);
 				setTimeout(function() {
 					$("#applyid").html(appid);
 					ue.setContent(res.addition);
@@ -244,10 +245,14 @@
 
 		//保存/关闭
 		function closeExtra() {
-			$.post("proja/Application/upApplyById", {
+			//alert("zhengzai baocun ...");
+			//alert($("#applyid").html());
+			
+			$.post("Application/upApplyById", {
 				id : $("#applyid").html(),
 				addition : $.trim(ue.getContent())
 			}, function(data) {
+				//alert(data);
 				if (data != "ok")
 					return;
 				$("#mypop-extra").slideUp(250);

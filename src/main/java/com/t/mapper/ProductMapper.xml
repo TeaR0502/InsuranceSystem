@@ -40,7 +40,7 @@
     ,
     <include refid="Blob_Column_List" />
     from product
-    where state = 1
+    where 1 = 1
      <if test="type != null" >
          AND type=#{type}
       </if>
@@ -197,37 +197,6 @@
         memo = #{memo,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where id = #{productId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.t.entity.Product" >
-    update product
-    set name = #{name,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      period = #{period,jdbcType=INTEGER},
-      creatorid = #{creatorid,jdbcType=BIGINT},
-      creatorname = #{creatorname,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      price = #{price,jdbcType=DOUBLE},
-      discount = #{discount,jdbcType=DOUBLE},
-      bottomprice = #{bottomprice,jdbcType=INTEGER},
-      myorder = #{myorder,jdbcType=INTEGER},
-      state = #{state,jdbcType=INTEGER},
-      memo = #{memo,jdbcType=LONGVARCHAR}
-    where id = #{productId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.t.entity.Product" >
-    update product
-    set name = #{name,jdbcType=VARCHAR},
-      type = #{type,jdbcType=VARCHAR},
-      period = #{period,jdbcType=INTEGER},
-      creatorid = #{creatorid,jdbcType=BIGINT},
-      creatorname = #{creatorname,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIMESTAMP},
-      price = #{price,jdbcType=DOUBLE},
-      discount = #{discount,jdbcType=DOUBLE},
-      bottomprice = #{bottomprice,jdbcType=INTEGER},
-      myorder = #{myorder,jdbcType=INTEGER},
-      state = #{state,jdbcType=INTEGER}
     where id = #{productId,jdbcType=BIGINT}
   </update>
 </mapper>

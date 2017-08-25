@@ -25,7 +25,7 @@ public class ProductServiceImpl implements IProductService {
 	@Autowired
 	private UserProductMapper userProductMapper;
 
-	public String search(int page, int rows, String type, String namelike) {
+	public String search(int page, int rows, String type, String namelike,String userTyep) {
 
 		if (namelike != null) {
 			namelike = "%" + namelike + "%";
@@ -38,12 +38,15 @@ public class ProductServiceImpl implements IProductService {
 		
 
 		List<Product> list=productMapper.search(type, namelike);
-		//不显示未经审核的保险(更新在数据查询中完成)
-//		for(int i= 0 ; i<list.size();i++ ){
-//			if (list.get(i).getState() == 0){
-//				list.remove(i);
-//			}
-//		}
+		if ("user".equals(userTyep)){
+			//不显示未经审核的保险(更新在数据查询中完成)
+			for(int i= 0 ; i<list.size();i++ ){
+				if (list.get(i).getState() == 0){
+					list.remove(i);
+				}
+			}
+		}
+		
 		for (Product product : list) {
 			product.setUsercount(countUser(product.getProductId()));
 		}
@@ -102,6 +105,16 @@ public class ProductServiceImpl implements IProductService {
 	public int insertSelective(Product product) {
 		
 		return productMapper.insertSelective(product);
+	}
+
+	public int deleteByPrimaryKey(Long productId) {
+		
+		return productMapper.deleteByPrimaryKey(productId);
+	}
+
+	public int updateByPrimaryKeySelective(Product product) {
+		
+		return productMapper.updateByPrimaryKeySelective(product);
 	}
 
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page isELIgnored="false"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -57,13 +58,13 @@
 				<tbody>
 					<tr>
 						<td>${apply.id}</td>
-						<td>${apply.productid}</td>
-						<td>${apply.productname}</td>
-						<td>${apply.productperiod}</td>
+						<td>${apply.productId}</td>
+						<td>${apply.productName}</td>
+						<td>${apply.productPeriod}</td>
 						<td>${apply.username}</td>
-						<td>${apply.usertruename}</td>
+						<td>${apply.userTruename}</td>
 						<td>${apply.usermobile}</td>
-						<td>${apply.useridcard}</td>
+						<td>${apply.userIdCard}</td>
 						<td><fmt:formatDate value="${apply.createtime}"
 								pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
 					</tr>
@@ -151,7 +152,7 @@
 				return;
 			}
 			//更新状态
-			$.post("proja/Application/passOrRefuseApply", {
+			$.post("Application/passOrRefuseApply", {
 				id : "${apply.id}",
 				reply : $.trim(ue.getContent()),
 				state : $("#replystate").val()
@@ -165,9 +166,10 @@
 
 		//显示证件图片
 		function showIdCard() {
-			var src1 = "extra/" + "${apply.username}" + "/idcard_1.jpg?"
+			//alert("${apply.username}");
+			var src1 = "userIdPic/" + "${apply.username}" + "/idcard1.jpg?"
 					+ Math.random();
-			var src2 = "extra/" + "${apply.username}" + "/idcard_2.jpg?"
+			var src2 = "userIdPic/" + "${apply.username}" + "/idcard2.jpg?"
 					+ Math.random();
 			$("#idcard_1").attr("src", src1);
 			$("#idcard_2").attr("src", src2);

@@ -10,6 +10,20 @@ import com.t.entity.UserProduct;
 public interface IProductService {
 	
 	/**
+     * 根据提供信息改动保险产品
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(Product record);
+    
+	/**
+	 * 根据主键删除保险
+	 * @param productId
+	 * @return
+	 */
+    int deleteByPrimaryKey(Long productId);
+	
+	/**
      * 增加一种保险
      * @param record
      * @return
@@ -24,7 +38,7 @@ public interface IProductService {
 	 * @param namelike
 	 * @return
 	 */
-	public String search(int page,int rows,String type,String namelike);
+	public String search(int page,int rows,String type,String namelike,String userType);
 	
 	/**
 	 * 添加user_product

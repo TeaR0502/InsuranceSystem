@@ -33,7 +33,7 @@
 	<div class="vbox-0 w90p cen">
 		<div class="vbox-1 txt-c w250 cen ft-1-g shadow">@ 新 增 产 品</div>
 		<div class="h20"></div>
-		<form action="proja/Product/insert" method="POST" id="fmPrdAdd">
+		<form action="Product/insert" method="POST" id="fmPrdAdd">
 			<div class="vbox-1">
 				<table class="table table-very table-basic">
 					<tr>

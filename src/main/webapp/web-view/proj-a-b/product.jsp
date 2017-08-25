@@ -48,11 +48,11 @@
 		<!-- 工作区 -->
 		<div region="center" class="box-0" border="false">
 			<table id="gridPrd" class="easyui-datagrid" border="false"
-				url="proja/Product/listProduct" singleSelect="true" toolbar="#tool"
+				url="Product/listProductAll" singleSelect="true" toolbar="#tool"
 				pagination="true">
 				<thead>
 					<tr>
-						<th field="id">编号</th>
+						<th field="productId">编号</th>
 						<th field="name">保险名</th>
 						<th field="type">类型</th>
 						<th field="period">周期(日)</th>
@@ -117,8 +117,9 @@
 			//删除
 			$.messager.confirm("操作确认", "是否确认删除?", function(r) {
 				if (r) {
-					$.post("proja/Product/delete", {
-						prdid : row.id
+					//alert(${row.id});
+					$.post("Product/delete", {
+						prdid : row.productId
 					}, function(data) {
 						if (data != "ok")
 							return;
@@ -139,8 +140,8 @@
 				return;
 			}
 			//iframe
-			var frm = "<iframe scrolling='auto' frameborder='0' style='width:95%;height:95%;' src='proja/Product/toUpdate?prdid="
-					+ row.id + "'></iframe>";
+			var frm = "<iframe scrolling='auto' frameborder='0' style='width:95%;height:95%;' src='Product/toUpdate?prdid="
+					+ row.productId + "'></iframe>";
 			//弹出
 			$("#mypop").window({
 				title : "产品编辑",
@@ -153,7 +154,7 @@
 		//弹出视图 
 		function popview(obj) {
 			//iframe
-			var frm = "<iframe scrolling='auto' frameborder='0' style='width:95%;height:95%;' src='demo/TabOrPopB/"
+			var frm = "<iframe scrolling='auto' frameborder='0' style='width:95%;height:95%;' src='demo/admin/"
 					+ $(obj).attr("view") + "'></iframe>";
 			//弹出
 			$("#mypop").window({

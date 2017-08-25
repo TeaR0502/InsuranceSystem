@@ -7,6 +7,11 @@ import org.apache.ibatis.annotations.Param;
 import com.t.entity.Product;
 
 public interface ProductMapper {
+	/**
+	 * 根据主键删除保险
+	 * @param productId
+	 * @return
+	 */
     int deleteByPrimaryKey(Long productId);
     
     /**
@@ -29,9 +34,11 @@ public interface ProductMapper {
      */
     List<Product> search(@Param("type") String type,@Param("namelike") String namelike);
 
-    int updateByPrimaryKeySelective(Product record);
+    /**
+     * 根据提供信息改动保险产品
+     * @param record
+     * @return
+     */
+    int updateByPrimaryKeySelective(Product product);
 
-    int updateByPrimaryKeyWithBLOBs(Product record);
-
-    int updateByPrimaryKey(Product record);
 }

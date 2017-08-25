@@ -43,16 +43,16 @@
 		<!-- 工作区 -->
 		<div region="center" class="box-0" border="false">
 			<table class="easyui-datagrid" id="gridapply" border="false"
-				url="proja/Application/allapply" singleSelect="true" toolbar="#tool"
+				url="Application/allapply" singleSelect="true" toolbar="#tool"
 				pagination="true">
 				<thead>
 					<tr>
 						<th field="id">单号</th>
 						<th field="username">用户名</th>
-						<th field="usertruename">真实姓名</th>
-						<th field="productid">保险编号</th>
-						<th field="productname">保险名</th>
-						<th field="productperiod">周期</th>
+						<th field="userTruename">真实姓名</th>
+						<th field="productId">保险编号</th>
+						<th field="productName">保险名</th>
+						<th field="productPeriod">周期</th>
 						<th field="createtime" formatter="tofulltime">申请时间</th>
 						<th field="state" formatter="showstate">申请状态</th>
 						<th field="esign">用户签名</th>
@@ -65,7 +65,7 @@
 				<a href="javascript:" class="easyui-linkbutton" iconCls="icon-save"
 					plain="true" view="reply" onclick="popview(this);">受理</a><a
 					href="javascript:" class="easyui-linkbutton" iconCls="icon-cut"
-					plain="true">删除</a>
+					plain="true" onclick="prddel();">删除</a>
 			</div>
 		</div>
 	</div>
@@ -111,6 +111,41 @@
 		function tofulltime(val, row) {
 			return $.msfmt.todate(val, true, 8);
 		}
+		
+		//申请删除
+		function prddel() {
+			//选中及验证
+			var row = $("#gridapply").datagrid("getSelected");
+			if (!row) {
+				$.messager.alert("申请操作", "请选中1条申请");
+				return;
+			}
+			//删除
+			$.messager.confirm("操作确认", "是否确认删除?", function(r) {
+				if (r) {
+					
+					if (row.state != 0) {
+						$.messager.alert("用户申请操作", "审核已通过或保单已送达,无法删除");
+						return;
+					}
+					if (row.esign != "") {
+						$.messager.alert("用户申请操作", "已签字订单,无法删除");
+						return;
+					}
+					//alert(${row.id});
+					$.post("Application/cancel", {
+						appid : row.id
+					}, function(data) {
+						//alert(data)
+						if (data != "ok")
+							return;
+						//回显
+						$.messager.alert("用户申请操作", "删除成功");
+						$("#gridapply").datagrid("reload");
+					});
+				}
+			});
+		}
 
 		//弹出视图 
 		function popview(obj) {
@@ -121,7 +156,7 @@
 				return;
 			}
 			//iframe
-			var frm = "<iframe scrolling='auto' frameborder='0' style='width:95%;height:95%;' src='proja/Application/toReply/"
+			var frm = "<iframe scrolling='auto' frameborder='0' style='width:95%;height:95%;' src='Application/toReply?id="
 					+ row.id + "'></iframe>";
 			//弹出
 			$("#mypop").window({

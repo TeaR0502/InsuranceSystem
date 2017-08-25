@@ -18,11 +18,28 @@ public interface IApplicationService {
 	int deleteByPrimaryKey(Long id);
 	
 	/**
-	 * 更新用户订单
+	 * 用户签名
 	 * @param record
 	 * @return
 	 */
-	int updateByPrimaryKeySelective(Application record);
+	int updateByPrimaryKeySelectiveForEsign(Application record);
+	
+	/**
+	 * 管理员审批
+	 * @param id
+	 * @param reply
+	 * @param state
+	 * @return
+	 */
+	int updateByPrimaryKeySelectiveForReply(long id,String reply,int state);
+	
+	/**
+	 * 添加备注信息
+	 * @param id
+	 * @param addtion
+	 * @return
+	 */
+	int updateByPrimaryKeySelectiveForAddition(long id,String addition);
 	
 	/**
 	 * 根据主键查询用户申请
@@ -49,5 +66,16 @@ public interface IApplicationService {
 	 * @return
 	 */
 	List<Application> selectByUserId(String date1, String date2, long userid);
+
+	
+	/**
+	 * 查询符合条件的用户申请
+	 * @param page 分页使用
+	 * @param rows 分页使用
+	 * @param date1
+	 * @param date2
+	 * @return
+	 */
+	String select(int page, int rows,String date1, String date2);
 
 }
